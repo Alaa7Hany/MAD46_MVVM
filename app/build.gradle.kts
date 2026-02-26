@@ -92,4 +92,10 @@ dependencies {
 
     implementation("com.github.bumptech.glide:glide:5.0.5")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose-android:2.8.7")
+
+    val koin_version = "4.1.1"
+
+    implementation ("io.insert-koin:koin-android:$koin_version")
+    implementation("io.insert-koin:koin-androidx-compose:$koin_version")
+    implementation("io.insert-koin:koin-androidx-compose-navigation:$koin_version")
 }

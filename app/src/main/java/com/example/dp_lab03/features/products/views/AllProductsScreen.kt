@@ -32,17 +32,15 @@ import com.bumptech.glide.integration.compose.GlideImage
 import com.example.dp_lab03.data.repo.ProductsRepo
 import com.example.dp_lab03.data.repo.ProductsRepoImpl
 import com.example.dp_lab03.features.products.viewmodel.AllProductsVM
-import com.example.dp_lab03.features.products.viewmodel.ProductsVMFactory
 import com.example.kandroid_lab05.data.model.ProductDTO
+import org.koin.androidx.compose.koinViewModel
+import org.koin.compose.koinInject
 
 @Composable
-fun AllProductsScreen( ) {
+fun AllProductsScreen(
+    viewModel: AllProductsVM = koinViewModel(),
+) {
     val context = LocalContext.current
-    val viewModel = viewModel<AllProductsVM> (
-        factory = ProductsVMFactory(
-            repo = ProductsRepoImpl.getInstance(context = context)
-        )
-    )
     val productsState by viewModel.productsState.collectAsStateWithLifecycle()
 
     LaunchedEffect(productsState.msg) {
