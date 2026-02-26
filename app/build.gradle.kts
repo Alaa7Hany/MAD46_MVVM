@@ -9,6 +9,9 @@ plugins {
 
     kotlin("plugin.serialization") version "2.1.10"
 
+
+    id("com.google.dagger.hilt.android")
+
 }
 
 android {
@@ -92,4 +95,8 @@ dependencies {
 
     implementation("com.github.bumptech.glide:glide:5.0.5")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose-android:2.8.7")
+
+    implementation("com.google.dagger:hilt-android:2.51.1")
+    ksp("com.google.dagger:hilt-android-compiler:2.51.1")
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 }

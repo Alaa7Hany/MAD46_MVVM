@@ -24,25 +24,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavHostController
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
-import com.example.dp_lab03.data.repo.ProductsRepo
-import com.example.dp_lab03.data.repo.ProductsRepoImpl
 import com.example.dp_lab03.features.products.viewmodel.AllProductsVM
-import com.example.dp_lab03.features.products.viewmodel.ProductsVMFactory
 import com.example.kandroid_lab05.data.model.ProductDTO
 
 @Composable
-fun AllProductsScreen( ) {
+fun AllProductsScreen(
+    viewModel: AllProductsVM = hiltViewModel()
+) {
     val context = LocalContext.current
-    val viewModel = viewModel<AllProductsVM> (
-        factory = ProductsVMFactory(
-            repo = ProductsRepoImpl.getInstance(context = context)
-        )
-    )
+
     val productsState by viewModel.productsState.collectAsStateWithLifecycle()
 
     LaunchedEffect(productsState.msg) {

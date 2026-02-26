@@ -10,12 +10,16 @@ import androidx.lifecycle.viewModelScope
 import com.example.dp_lab03.data.repo.ProductsRepo
 import com.example.dp_lab03.data.repo.ProductsRepoImpl
 import com.example.kandroid_lab05.data.model.ProductDTO
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class FavVM(private val productsRepo : ProductsRepo) : ViewModel() {
+@HiltViewModel
+class FavVM @Inject constructor
+    (private val productsRepo : ProductsRepo) : ViewModel() {
 
     private val _favState = MutableStateFlow(FavUiState())
     val favState = _favState.asStateFlow()

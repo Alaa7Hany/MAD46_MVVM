@@ -10,12 +10,16 @@ import androidx.lifecycle.viewModelScope
 import com.example.dp_lab03.data.repo.ProductsRepo
 import com.example.dp_lab03.data.repo.ProductsRepoImpl
 import com.example.kandroid_lab05.data.model.ProductDTO
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class AllProductsVM (private val productsRepo: ProductsRepo): ViewModel() {
+@HiltViewModel
+class AllProductsVM @Inject constructor
+    (private val productsRepo: ProductsRepo): ViewModel() {
 
     private val _productsState = MutableStateFlow(ProductsState())
     val productsState = _productsState.asStateFlow()

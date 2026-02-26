@@ -18,7 +18,9 @@ import com.example.dp_lab03.features.fav.views.FavScreen
 import com.example.dp_lab03.features.home.views.HomeScreen
 import com.example.dp_lab03.features.products.views.AllProductsScreen
 import com.example.dp_lab03.ui.theme.DP_lab03Theme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

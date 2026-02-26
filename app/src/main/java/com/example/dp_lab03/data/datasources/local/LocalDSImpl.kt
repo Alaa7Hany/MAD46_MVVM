@@ -5,22 +5,10 @@ import com.example.kandroid_lab05.data.db.ProductsDAO
 import com.example.kandroid_lab05.data.db.ProductsDB
 import com.example.kandroid_lab05.data.model.ProductDTO
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class LocalDSImpl private constructor(context: Context) : LocalDS {
-    private val productsDAO : ProductsDAO
-    init {
-        productsDAO = ProductsDB.getInstance(context).getProductsDAO()
-    }
-
-    companion object{
-        @Volatile
-        private var instance : LocalDSImpl? = null
-        fun getInstance(context: Context) : LocalDSImpl{
-            return instance ?: synchronized(this) {
-                instance ?: LocalDSImpl(context).also { instance = it }
-            }
-        }
-    }
+class LocalDSImpl @Inject constructor(private val productsDAO : ProductsDAO
+) : LocalDS {
 
     override suspend fun addToFav(product: ProductDTO) : Long{
         return productsDAO.addToFav(product)

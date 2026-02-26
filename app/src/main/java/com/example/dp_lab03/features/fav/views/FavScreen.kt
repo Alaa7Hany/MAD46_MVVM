@@ -24,23 +24,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.example.dp_lab03.data.repo.ProductsRepoImpl
 import com.example.dp_lab03.features.fav.viewmodel.FavVM
-import com.example.dp_lab03.features.fav.viewmodel.FavVMFactory
 import com.example.kandroid_lab05.data.model.ProductDTO
 
+
 @Composable
-fun FavScreen(modifier: Modifier = Modifier) {
+fun FavScreen(modifier: Modifier = Modifier, viewModel: FavVM = hiltViewModel()) {
     val context = LocalContext.current
-    val viewModel = viewModel<FavVM>(
-        factory = FavVMFactory(
-            repo = ProductsRepoImpl.getInstance(context)
-        )
-    )
 
     val favState by viewModel.favState.collectAsStateWithLifecycle()
 

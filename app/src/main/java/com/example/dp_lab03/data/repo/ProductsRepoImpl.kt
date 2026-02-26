@@ -7,25 +7,11 @@ import com.example.dp_lab03.data.datasources.remote.RemoteDS
 import com.example.dp_lab03.data.datasources.remote.RemoteDSImpl
 import com.example.kandroid_lab05.data.model.ProductDTO
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class ProductsRepoImpl private constructor(context: Context) : ProductsRepo {
-    private val remoteDS : RemoteDS
-    private val localDS : LocalDS
-
-    init {
-        remoteDS = RemoteDSImpl.getInstance()
-        localDS = LocalDSImpl.getInstance(context)
-    }
-
-    companion object{
-        @Volatile
-        private var instance : ProductsRepoImpl? = null
-        fun getInstance(context: Context) : ProductsRepoImpl{
-            return instance ?: synchronized(this){
-                instance ?: ProductsRepoImpl(context).also { instance = it }
-            }
-        }
-    }
+class ProductsRepoImpl @Inject constructor(
+    private val remoteDS : RemoteDS,
+    private val localDS : LocalDS) : ProductsRepo {
 
     override suspend fun getAllProducts() : List<ProductDTO> {
         return remoteDS.getProducts().products
