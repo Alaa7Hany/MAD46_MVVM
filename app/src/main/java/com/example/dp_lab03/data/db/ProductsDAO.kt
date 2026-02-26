@@ -6,11 +6,12 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.kandroid_lab05.data.model.ProductDTO
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ProductsDAO {
     @Query("SELECT * FROM products")
-    suspend fun getProducts() : List<ProductDTO>
+    fun getProducts() : Flow<List<ProductDTO>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveProducts(products:List<ProductDTO>)

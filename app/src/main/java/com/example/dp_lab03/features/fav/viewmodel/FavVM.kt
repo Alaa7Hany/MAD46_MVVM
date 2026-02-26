@@ -27,8 +27,10 @@ class FavVM(private val productsRepo : ProductsRepo) : ViewModel() {
     fun getFavs(){
         viewModelScope.launch {
             _favState.update { it.copy(isLoading = true) }
-            _favState.update { it.copy(products = productsRepo.getFavs()) }
-            _favState.update { it.copy(isLoading = false) }
+            productsRepo.getFavs().collect{list->
+                _favState.update { it.copy(products = list) }
+                _favState.update { it.copy(isLoading = false) }
+            }
         }
     }
 
@@ -36,7 +38,6 @@ class FavVM(private val productsRepo : ProductsRepo) : ViewModel() {
         viewModelScope.launch {
             val rowsDeleted = productsRepo.deleteFav(productDTO)
             if(rowsDeleted > 0){
-                _favState.update { it.copy(products = productsRepo.getFavs()) }
                 _favState.update { it.copy(msg = "Item deleted successfully") }
             } else {
                 _favState.update { it.copy(msg = "Error Could not remove item") }

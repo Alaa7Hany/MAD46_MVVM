@@ -6,6 +6,7 @@ import com.example.dp_lab03.data.datasources.local.LocalDSImpl
 import com.example.dp_lab03.data.datasources.remote.RemoteDS
 import com.example.dp_lab03.data.datasources.remote.RemoteDSImpl
 import com.example.kandroid_lab05.data.model.ProductDTO
+import kotlinx.coroutines.flow.Flow
 
 class ProductsRepoImpl private constructor(context: Context) : ProductsRepo {
     private val remoteDS : RemoteDS
@@ -34,7 +35,7 @@ class ProductsRepoImpl private constructor(context: Context) : ProductsRepo {
         return localDS.addToFav(productDTO) > -1
     }
 
-    override suspend fun getFavs():List<ProductDTO>{
+    override fun getFavs(): Flow<List<ProductDTO>>{
         return localDS.getFavs()
     }
 

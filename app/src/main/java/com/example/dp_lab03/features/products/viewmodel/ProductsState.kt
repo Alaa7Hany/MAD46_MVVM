@@ -8,3 +8,9 @@ data class ProductsState(
     val error : String? = null,
     val msg : String? = null
 )
+
+sealed class MyState{
+    data class Success(val productsState: ProductsState) : MyState()
+    class Failure : MyState()
+    class Loading : MyState()
+}

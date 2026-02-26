@@ -4,6 +4,7 @@ import android.content.Context
 import com.example.kandroid_lab05.data.db.ProductsDAO
 import com.example.kandroid_lab05.data.db.ProductsDB
 import com.example.kandroid_lab05.data.model.ProductDTO
+import kotlinx.coroutines.flow.Flow
 
 class LocalDSImpl private constructor(context: Context) : LocalDS {
     private val productsDAO : ProductsDAO
@@ -25,7 +26,7 @@ class LocalDSImpl private constructor(context: Context) : LocalDS {
         return productsDAO.addToFav(product)
     }
 
-    override suspend fun getFavs(): List<ProductDTO>{
+    override fun getFavs(): Flow<List<ProductDTO>> {
         return productsDAO.getProducts()
     }
 
